@@ -54,11 +54,7 @@ router.post(
 
 			await user.save();
 
-			const payload = {
-				user: {
-					id: user.id,
-				},
-			};
+			const payload = { user: { id: user.id } };
 
 			jwt.sign(
 				payload,
@@ -85,7 +81,7 @@ router.post(
 	[
 		check('email', 'Please enter a valid email').isEmail(),
 		check('password', 'Please enter a valid password').isLength({
-			min: 6,
+			min: 5,
 		}),
 	],
 	async (req, res) => {

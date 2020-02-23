@@ -50,7 +50,13 @@ function validateUser(user) {
 			.required(),
 	};
 
-	return Joi.validate(user, schema);
+	return Joi.validate(user, schema, (err, value) => {
+		if (err) {
+			console.log(err.details);
+		} else {
+			console.log(value);
+		}
+	});
 }
 
 exports.userSchema = userSchema;
