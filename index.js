@@ -1,7 +1,8 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const user = require("./routes/user");
-const InitiateMongoServer = require("./config/db");
+import express from 'express';
+import bodyParser from 'body-parser';
+import user from './routes/user';
+import InitiateMongoServer from './config/db';
+import logger from 'v-response';
 
 // Initiate Mongo Server
 InitiateMongoServer();
@@ -9,13 +10,13 @@ InitiateMongoServer();
 const app = express();
 
 // PORT
-const PORT = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 
 // Middleware
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.json({ message: "API Working" });
+app.get('/', (req, res) => {
+	res.json({ message: 'API Working' });
 });
 
 /**
@@ -23,8 +24,6 @@ app.get("/", (req, res) => {
  * Router - /user/*
  * Method - *
  */
-app.use("/user", user);
+app.use('/user', user);
 
-app.listen(PORT, (req, res) => {
-  console.log(`Server Started at PORT ${PORT}`);
-});
+app.listen(port, logger.log('listing on port', port));
